@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-32z1w%!s+ztm%ow=l2mf!dol409fed@75778)1^wtmq@ecew8)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+# 允许的服务器
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -138,3 +139,7 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 静态文件收集目录
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
