@@ -19,7 +19,7 @@ from django.urls import path, include
 from article import views
 
 urlpatterns = [
-    path('', views.article_list()),
+    path('', views.article_list),
     path('admin/', admin.site.urls),
     # 文章管理
     path('article/', include('article.urls', namespace='article')),
