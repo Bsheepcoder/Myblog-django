@@ -1,0 +1,11 @@
+<div class="card mt-2" style="">
+    <div class="card-body">
+        <h3 class="card-title">文章分类</h3>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <ul>
+            {% for col in columns %}
+                <li><a href="{% url 'article:article_list' %}?column={{ col.title }}">{{ col.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
