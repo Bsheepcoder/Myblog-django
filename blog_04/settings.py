@@ -140,7 +140,7 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_ROOT = '/home/sites/myblog.com/Myblog04/collected_static'
+STATIC_ROOT = '/home/myblog.com/Myblog04/collected_static'
 
 
 
