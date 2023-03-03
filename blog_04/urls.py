@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 # 记得引入include
 from django.urls import path, include
+from article import views
 
 urlpatterns = [
+    path('', views.article_list()),
     path('admin/', admin.site.urls),
-
     # 文章管理
     path('article/', include('article.urls', namespace='article')),
-
     # 用户管理
     path('userprofile/', include('userprofile.urls', namespace='userprofile')),
 ]
