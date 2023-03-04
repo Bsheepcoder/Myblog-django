@@ -57,10 +57,6 @@
 >
 <script src="https://kit.fontawesome.com/ef0747a413.js" crossorigin="anonymous"></script>
 <!-- 返回顶部按钮 -->
-
-{% block js %}
-
-{% endblock %}
 <script>
 
     $(function () {
@@ -99,8 +95,10 @@
             }
         })
     }
-
 </script>
+{% block js %}
+
+{% endblock %}
 {% include 'back_to_top_func.html' %}
 </body>
 </html>
