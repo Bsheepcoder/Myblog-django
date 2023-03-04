@@ -8,10 +8,6 @@
     <meta charset="utf-8">
     <!-- 移动端设置 -->
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
     <title>{% block title %}{% endblock %}</title>
     <!-- 引入bootstrap的css文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -70,6 +66,12 @@
     $(function () {
 
     })
+
+    $(document).ready(function () {
+        document.ontouchmove = function (e) {
+            e.preventDefault();
+        }
+    });
 
     function showcolumn() {
         var myChart = document.getElementById('chart3');
