@@ -64,7 +64,7 @@
 <script>
 
     $(function () {
-        document.body.addEventListener('touchmove', self.welcomeShowedListener, false);
+        $("html,body").css("touch-action", "none").css("touch-action", "pan-y");
     })
 
     function showcolumn() {
