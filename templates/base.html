@@ -64,14 +64,9 @@
 <script>
 
     $(function () {
-
+        $("html,body").css("overflow", "hidden").css("height", "100%");
+        document.body.addEventListener('touchmove', self.welcomeShowedListener, false);
     })
-
-    $(document).ready(function () {
-        document.ontouchmove = function (e) {
-            e.preventDefault();
-        }
-    });
 
     function showcolumn() {
         var myChart = document.getElementById('chart3');
