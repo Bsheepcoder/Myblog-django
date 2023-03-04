@@ -16,6 +16,6 @@ def navigation_bar(request):
 
     columns = zip(columns, column_number)
     contexts = {
-        "columns": columns,
+        "columnsToAll": columns,
     }
     return contexts

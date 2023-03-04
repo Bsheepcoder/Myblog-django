@@ -3,7 +3,7 @@
         <h3 class="card-title">文章分类</h3>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
         <ul class="mt-4">
-            {% for col,num in columns %}
+            {% for col,num in columnsToAll %}
                 <div class="mt-2">
                     <li><a href="{% url 'article:article_list' %}?column={{ col.title }}">{{ col.title }} </a><span
                             class="badge badge-primary badge-pill">{{ num }}</span></li>
