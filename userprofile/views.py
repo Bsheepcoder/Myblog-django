@@ -19,7 +19,6 @@ def user_login(request):
         return render(request, 'userprofile/login.html', context)
 
     if user_login_form.is_valid():
-
         user_input_code = user_login_form.cleaned_data.pop('code')
         session_code = request.session.get('image_code')
 
@@ -28,6 +27,7 @@ def user_login(request):
             user = authenticate(username=data['username'], password=data['password'])
 
             if user:
+                request.session.set_expiry(60 * 60 * 24 * 7)  # 60s超时
                 # 将用户数据保存在 session 中，即实现了登录动作
                 login(request, user)
                 return redirect("article:article_list")
