@@ -15,4 +15,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     # 用户注册
     path('register/', views.user_register, name='register'),
+    # 登录验证码
+    path('checkCode/', views.imge_code, name='checkCode'),
 ]

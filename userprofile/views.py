@@ -7,41 +7,62 @@ from .forms import UserLoginForm
 from django.contrib.auth import authenticate, login, logout
 # 引入 UserRegisterForm 表单类
 from .forms import UserLoginForm, UserRegisterForm
+from .utils.imgCode import check_code
+
 
 # Create your views here.
 
 def user_login(request):
-    if request.method == 'POST':
-        user_login_form = UserLoginForm(data=request.POST)
-        if user_login_form.is_valid():
-            # .cleaned_data 清洗出合法数据
+    user_login_form = UserLoginForm(data=request.POST)
+    if request.method == 'GET':
+        context = {'form': user_login_form}
+        return render(request, 'userprofile/login.html', context)
+
+    if user_login_form.is_valid():
+
+        user_input_code = user_login_form.cleaned_data.pop('code')
+        session_code = request.session.get('image_code')
+
+        if user_input_code == session_code:
             data = user_login_form.cleaned_data
-            # 检验账号、密码是否正确匹配数据库中的某个用户
-            # 如果均匹配则返回这个 user 对象
             user = authenticate(username=data['username'], password=data['password'])
+
             if user:
                 # 将用户数据保存在 session 中，即实现了登录动作
                 login(request, user)
                 return redirect("article:article_list")
-            else:
-                return HttpResponse("账号或密码输入有误。请重新输入~")
-        else:
-            return HttpResponse("账号或密码输入不合法")
-    elif request.method == 'GET':
-        user_login_form = UserLoginForm()
+            user_login_form.add_error("password", "用户名或密码错误")
+            context = {'form': user_login_form}
+            return render(request, 'userprofile/login.html', context)
+
+        user_login_form.add_error("code", "验证码错误")
         context = {'form': user_login_form}
         return render(request, 'userprofile/login.html', context)
-    else:
-        return HttpResponse("请使用GET或POST请求数据")
+    context = {'form': user_login_form}
+    return render(request, 'userprofile/login.html', context)
+
+
+from io import BytesIO
+
+
+# 验证码
+def imge_code(request):
+    img, check_char = check_code()
+
+    # 写入session
+    request.session['image_code'] = check_char
+    request.session.set_expiry(60)  # 60s超时
+
+    # 在内存中创建文件
+    stream = BytesIO()
+    img.save(stream, 'png')
+    return HttpResponse(stream.getvalue())
 
 
 # 用户退出
 def user_logout(request):
     logout(request)
     return redirect("article:article_list")
-
-
-
 
 
 # 用户注册
