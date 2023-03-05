@@ -16,6 +16,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 from .models import ArticleColumn
 
+
 def article_list(request):
     search = request.GET.get('search')
     order = request.GET.get('order')
@@ -200,3 +201,5 @@ def article_column(request):
     columnlist = ArticleColumn.objects.all()
 
     return render(request, {'columnlist': columnlist})
+
+

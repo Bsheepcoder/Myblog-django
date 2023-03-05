@@ -27,4 +27,5 @@ urlpatterns = [
     path('article-update/<int:id>/', views.article_update, name='article_update'),
     # 文章标签
     path('article-column/', views.article_column, name='article_column'),
+
 ]

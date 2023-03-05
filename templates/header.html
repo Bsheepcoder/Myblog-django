@@ -4,8 +4,9 @@
     <div class="container">
         <svg viewBox="0 0 900 200" style="width: 400px;height: 200px">
             <symbol id="s-text">
-                <text text-anchor="middle" x="40%" y="70%" class="text--line"><a style="color: #232323" href="{% url 'article:article_list' %}">Q's blog</a></text>
-{#                <text text-anchor="middle" x="50%" y="68%" class="text--line">Text</text>#}
+                <text text-anchor="middle" x="40%" y="70%" class="text--line"><a style="color: #232323" href="{% url 'article:article_list' %}">Q's
+                    blog</a></text>
+                {#                <text text-anchor="middle" x="50%" y="68%" class="text--line">Text</text>#}
             </symbol>
             <g class="g-ants">
                 <use xlink:href="#s-text" class="text-copy"></use>
@@ -27,20 +28,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'article:article_list' %}">文章列表<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'article:article_list' %}">List<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">*</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                    更多
+                    More
                 </a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">建设中</a>
-                    <a class="dropdown-item" href="#">建设中</a>
+                    <a class="dropdown-item" href="#">loading</a>
+                    <a class="dropdown-item" href="#">loading</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">建设中</a>
+                    <a class="dropdown-item" href="#">loading</a>
                 </div>
             </li>
         </ul>
@@ -74,63 +75,63 @@
 
 
 <style>
-        .text--line {
-            font-size: 150px;
-        }
+    .text--line {
+        font-size: 150px;
+    }
 
-        svg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
+    svg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
 
-        .text-copy {
-            fill: #232323;
-            stroke: white;
-            stroke-dasharray: 10% 15%;
-            stroke-width: 5px;
-            -webkit-animation: stroke-offset 14s infinite linear;
-            animation: stroke-offset 14s infinite linear;
-        }
+    .text-copy {
+        fill: #232323;
+        stroke: white;
+        stroke-dasharray: 10% 15%;
+        stroke-width: 5px;
+        -webkit-animation: stroke-offset 14s infinite linear;
+        animation: stroke-offset 14s infinite linear;
+    }
 
-        .text-copy:nth-child(1) {
-            stroke: #360745;
-            stroke-dashoffset: 7%;
-        }
+    .text-copy:nth-child(1) {
+        stroke: #360745;
+        stroke-dashoffset: 7%;
+    }
 
-        .text-copy:nth-child(2) {
-            stroke: #D61C59;
-            stroke-dashoffset: 14%;
-        }
+    .text-copy:nth-child(2) {
+        stroke: #D61C59;
+        stroke-dashoffset: 14%;
+    }
 
-        .text-copy:nth-child(3) {
-            stroke: #E7D84B;
-            stroke-dashoffset: 21%;
-        }
+    .text-copy:nth-child(3) {
+        stroke: #E7D84B;
+        stroke-dashoffset: 21%;
+    }
 
-        .text-copy:nth-child(4) {
-            stroke: #EFEAC5;
-            stroke-dashoffset: 28%;
-        }
+    .text-copy:nth-child(4) {
+        stroke: #EFEAC5;
+        stroke-dashoffset: 28%;
+    }
 
-        .text-copy:nth-child(5) {
-            stroke: #4ac1f7;
+    .text-copy:nth-child(5) {
+        stroke: #4ac1f7;
+        stroke-dashoffset: 35%;
+    }
+
+    @-webkit-keyframes stroke-offset {
+        50% {
             stroke-dashoffset: 35%;
+            stroke-dasharray: 0 87.5%;
         }
+    }
 
-        @-webkit-keyframes stroke-offset {
-            50% {
-                stroke-dashoffset: 35%;
-                stroke-dasharray: 0 87.5%;
-            }
+    @keyframes stroke-offset {
+        50% {
+            stroke-dashoffset: 35%;
+            stroke-dasharray: 0 87.5%;
         }
-
-        @keyframes stroke-offset {
-            50% {
-                stroke-dashoffset: 35%;
-                stroke-dasharray: 0 87.5%;
-            }
-        }
+    }
 </style>
 <script>
 
