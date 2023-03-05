@@ -6,7 +6,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import random
 import string
-from django.conf import
 
 def check_code(width=120, height=30, char_length=5, font_file='/home/myblog.com/Myblog04/collected_static/font/Monaco-1.ttf', font_size=28):
     # 创建图片
