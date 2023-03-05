@@ -64,7 +64,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'article.context_processors.navigation_bar',
+                'article.context_processors.columns_tag',
+                'article.context_processors.article_count',
+                'article.context_processors.runtime_now',
             ],
         },
     },
@@ -130,7 +132,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
@@ -142,5 +143,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = '/home/myblog.com/Myblog04/collected_static'
 
-
-
+BEGIN_TIME = '2023-3-3'

@@ -11,4 +11,18 @@
             {% endfor %}
         </ul>
     </div>
+
+</div>
+
+<div class="card mt-2" style="">
+    <div class="card-body">
+        <h3 class="card-title">网站统计</h3>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <ul class="list-group list-group-flush" style="font-size: medium">
+            <li class="list-group-item"><strong>文章数目 : </strong>{{ article_number }}</li>
+            <li class="list-group-item"><strong>已运行时间 : </strong>{{ runtime_days }} 天</li>
+            <li class="list-group-item"><strong>访客数 : </strong>想做成基于IP的统计</li>
+            <li class="list-group-item"><strong>总访问量 :</strong> {{ article_views }} 次</li>
+        </ul>
+    </div>
 </div>
