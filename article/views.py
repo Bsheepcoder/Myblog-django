@@ -104,7 +104,9 @@ def article_detail(request, id):
         article.title = frontmatter['title']
     # 需要传递给模板的对象
     context = {'article': article,
-               'body': json.dumps(body[num:-1]), }
+               'body': json.dumps(body[num:-1]),
+               'id': id,
+               }
 
     # 载入模板，并返回context对象
     return render(request, 'article/detail.html', context)
@@ -201,5 +203,3 @@ def article_column(request):
     columnlist = ArticleColumn.objects.all()
 
     return render(request, {'columnlist': columnlist})
-
-

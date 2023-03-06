@@ -96,13 +96,18 @@
     <script src="{% static 'plugins/editor.md-master/lib/raphael.min.js' %}"></script>
     <script src="{% static 'plugins/editor.md-master/lib/sequence-diagram.min.js' %}"></script>
     <script src="{% static 'plugins/editor.md-master/lib/underscore.min.js' %}"></script>
+
+
+
     <script>
         $(function () {
             //使用editor.md渲染markdown
             var str = {{ body|safe }};
             markdown(str);
-            //目录样式
-            catalog();
+
+
+            //评论系统
+            renderGitment();
         })
 
 
@@ -130,6 +135,7 @@
                 item.classList.add('')
             })
         }
+
         //防范csrf攻击的删除
         function confirm_safe_delete() {
             layer.open({
@@ -141,6 +147,7 @@
                 }
             })
         }
+
     </script>
 
 {% endblock js %}

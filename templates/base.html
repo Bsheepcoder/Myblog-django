@@ -12,8 +12,9 @@
     <!-- 引入bootstrap的css文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
     <style>
-        .nav-item>a:hover{
+        .nav-item > a:hover {
             font-size: large;
             font-weight: bolder;
         }
@@ -84,134 +85,10 @@
         }, false);
 
         //echart组件
-        title();
+
     })
 
-    function showcolumn() {
-        var myChart = document.getElementById('chart3');
 
-        $.ajax({
-            url: "chart/pie/",
-            type: "get",
-            dataType: "JSON",
-            success: function (res) {
-                //将后台返回的数据，更新到option中
-                if (res.status) {
-                    option.series[0].data = res.data.series_list;
-                    // 使用刚指定的配置项和数据显示图表。
-                    myChart.setOption(option);
-                }
-            }
-        })
-    }
-
-    function title() {
-        var chartDom = document.getElementById('main');
-        var myChart = echarts.init(chartDom);
-        var option;
-
-        option = {
-            color: 3,
-            graphic: {
-                elements: [
-                    {
-                        type: 'text',
-                        left: 'left',
-                        top: 'center',
-                        style: {
-                            text: "Q's blog",
-                            fontSize: 50,
-                            fontWeight: 'lighter',
-                            lineDash: [0, 200],
-                            lineDashOffset: 0,
-                            fill: 'transparent',
-                            stroke: '#ffffff',
-                            lineWidth: 1
-                        },
-                        keyframeAnimation: {
-                            duration: 3000,
-                            loop: false,
-                            keyframes: [
-                                {
-                                    percent: 0.7,
-                                    style: {
-                                        fill: 'transparent',
-                                        lineDashOffset: 200,
-                                        lineDash: [200, 0]
-                                    }
-                                },
-                                {
-                                    // Stop for a while.
-                                    percent: 0.8,
-                                    style: {
-                                        fill: 'transparent'
-                                    }
-                                },
-                                {
-                                    percent: 1,
-                                    style: {
-                                        fill: 'white'
-                                    }
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
-    }
-
-    function flow() {
-        var chartDom = document.getElementById('main');
-        var myChart = echarts.init(chartDom);
-        var option;
-
-        option = {
-            graphic: {
-                elements: [
-                    {
-                        type: 'group',
-                        left: 'center',
-                        top: 'center',
-                        children: new Array(7).fill(0).map((val, i) => ({
-                            type: 'rect',
-                            x: i * 20,
-                            shape: {
-                                x: 0,
-                                y: -40,
-                                width: 10,
-                                height: 80
-                            },
-                            style: {
-                                fill: '#5470c6'
-                            },
-                            keyframeAnimation: {
-                                duration: 1000,
-                                delay: i * 200,
-                                loop: true,
-                                keyframes: [
-                                    {
-                                        percent: 0.5,
-                                        scaleY: 0.3,
-                                        easing: 'cubicIn'
-                                    },
-                                    {
-                                        percent: 1,
-                                        scaleY: 1,
-                                        easing: 'cubicOut'
-                                    }
-                                ]
-                            }
-                        }))
-                    }
-                ]
-            }
-        };
-
-        option && myChart.setOption(option);
-    }
 </script>
 {% block js %}
 
