@@ -64,28 +64,6 @@ def article_list(request):
 
 
 # 找到markdown中的frontmatter属性
-def find(str):
-    # 返回字典
-    result = {}
-    # 记录识别---
-    tag = 0
-    # 格式化str
-    strArray = str.split()
-    # 记录frontmatter的字符数
-    count = 0
-    for i, v in enumerate(strArray):
-        if v == '---':
-            count += 9
-            tag += 1
-        if tag == 1:
-            istitle = strArray[i + 1]
-            isinfo = strArray[i + 2]
-            if istitle[-1] == ':' and istitle != '---':
-                count = count + len(istitle) + 1
-                if isinfo[-1] != ':' and istitle != '---':
-                    count = count + len(isinfo)
-                    result[istitle[0:-1]] = isinfo
-    return result, count
 
 
 # 文章详情
@@ -98,13 +76,9 @@ def article_detail(request, id):
     article.total_views += 1
     article.save(update_fields=['total_views'])
 
-    # 查看md中是否有frontmatter
-    frontmatter, num = find(body[0:100])
-    if frontmatter != {}:
-        article.title = frontmatter['title']
     # 需要传递给模板的对象
     context = {'article': article,
-               'body': json.dumps(body[num:-1]),
+               'body': json.dumps(body),
                'id': id,
                }
 
