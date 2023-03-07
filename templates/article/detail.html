@@ -8,13 +8,11 @@
 {% endblock title %}
 
 {% block css %}
-    <!-- 引入editor.md相关样式 -->
+    <link rel="stylesheet" href="{% static 'plugins/editor.md-master/css/editormd.css' %}"/>
     <link rel="stylesheet" href="{% static 'plugins/editor.md-master/css/editormd.preview.css' %}"/>
-    <link REL="stylesheet" href="{% static 'plugins/katex/katex.min.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
-          integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
 
-    </style>
+
 
 {% endblock css %}
 
@@ -92,16 +90,15 @@
 
 
 {% block js %}
-    <script src="{% static 'plugins/editor.md-master/editormd.js' %}"></script>
-    <script src="{% static 'plugins/katex/katex.min.js' %}"></script>
+    <script src="{% static 'plugins/editor.md-master/editormd.min.js' %}"></script>
     <script src="{% static 'plugins/editor.md-master/lib/marked.min.js' %}"></script>
     <script src="{% static 'plugins/editor.md-master/lib/prettify.min.js' %}"></script>
     <script src="{% static 'plugins/editor.md-master/lib/raphael.min.js' %}"></script>
     <script src="{% static 'plugins/editor.md-master/lib/sequence-diagram.min.js' %}"></script>
     <script src="{% static 'plugins/editor.md-master/lib/underscore.min.js' %}"></script>
+    <script src="{% static 'plugins/katex/katex.min.js' %}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
-            integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+
 
 
 
@@ -111,9 +108,6 @@
             var str = {{ body|safe }};
             markdown(str);
 
-
-            //评论系统
-            renderGitment();
         })
 
 
@@ -130,17 +124,10 @@
                 taskList: true,
                 tex: true, // 默认不解析
                 codeFold: true,
+                path: "{% static 'plugins/editor.md-master/lib/' %}",
             });
         }
 
-        function catalog() {
-            // 目录层级
-            const tocLink = document.querySelectorAll('a[level]')	//目录的每一项就是一个包含level属性的a标签
-            tocLink.forEach((item) => {
-                const level = parseInt(item.getAttribute('level'))
-                item.classList.add('')
-            })
-        }
 
         //防范csrf攻击的删除
         function confirm_safe_delete() {
@@ -153,7 +140,6 @@
                 }
             })
         }
-
     </script>
 
 {% endblock js %}

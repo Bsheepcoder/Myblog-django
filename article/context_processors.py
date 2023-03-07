@@ -9,6 +9,7 @@ import time
 from django.conf import settings
 from django.db.models import Sum
 
+
 def columns_tag(request):
     columns = ArticleColumn.objects.all()
     column_number = []
@@ -27,9 +28,14 @@ def article_count(request):
     num = ArticlePost.objects.all().count()
     # 文章总浏览量统计
     article_view = ArticlePost.objects.all().aggregate(Sum('total_views'))
+
+    # 统计热门文章
+    article_hotlist = ArticlePost.objects.all().order_by('-total_views')[:5]
+
     contexts = {
         "article_number": num,
         "article_views": article_view['total_views__sum'],
+        "article_hotList": article_hotlist,
     }
     return contexts
 

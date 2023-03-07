@@ -1,16 +1,5 @@
 <!-- extends表明此页面继承自 base.html 文件 -->
-{% extends "base.html" %} {% load static %}
-<!-- 写入 base.html 中定义的 title -->
-{% block title %} 写文章 {% endblock title %}
-
-{% block css %}
-    <link rel="stylesheet" href="{% static 'plugins/editor.md-master/css/editormd.css' %}"/>
-    <style>
-        #row2 {
-            display: none;
-        }
-    </style>
-{% endblock %}
+{% extends "article/article.html" %} {% load static %}
 
 
 <!-- 写入 base.html 中定义的 content -->
@@ -66,19 +55,4 @@
         </div>
     </div>
 
-{% endblock %}
-
-
-{% block js %}
-    <script src="{% static 'plugins/editor.md-master/editormd.min.js' %}"></script>
-    <script type="text/javascript">
-        $(function () {
-            var editor = editormd("test-editor", {
-                // width  : "100%",
-                height: "700px",
-                path: "{% static 'plugins/editor.md-master/lib/' %}",
-                emoji: true,
-            });
-        });
-    </script>
 {% endblock %}

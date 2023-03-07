@@ -1,15 +1,7 @@
-{% extends "base.html" %} {% load static %}
+{% extends "article/article.html" %} {% load static %}
 {% block title %} 更新文章 {% endblock title %}
 
-{% block css %}
-    <link rel="stylesheet" href="{% static 'plugins/editor.md-master/css/editormd.css' %}"/>
-    <style>
-        {# 取消侧边栏   #}
-        #row2 {
-            display: none;
-        }
-    </style>
-{% endblock %}
+
 
 
 
@@ -20,40 +12,50 @@
                 <br>
                 <form method="post" action=".">
                     {% csrf_token %}
-                    <div class="form-group">
-                        <label for="title">文章标题</label>
-                        <!-- 在 value 属性中指定文本框的初始值为旧的内容，即 article 对象中的 title 字段 -->
-                        <input type="text" class="form-control" id="title" name="title" value="{{ article.title }}">
+
+                    <div style="width: 400px">
+                        <div class="form-group">
+                            <label for="title"><strong>文章标题</strong></label>
+                            <!-- 在 value 属性中指定文本框的初始值为旧的内容，即 article 对象中的 title 字段 -->
+                            <input type="text" class="form-control" id="title" name="title" value="{{ article.title }}">
+                        </div>
+                        <!-- 文章栏目 -->
+                        <div class="form-group">
+                            <label for="column"><strong>栏目</strong></label>
+                            <select class="form-control"
+                                    id="column"
+                                    name="column"
+                            >
+                                <option value="none">请选择栏目..</option>
+                                {% for column in columns %}
+                                    <option value="{{ column.id }}"
+                                            {% if column.id == article.column.id %}
+                                            selected
+                                            {% endif %}
+                                    >
+                                        {{ column }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
-                    <!-- 文章栏目 -->
+
                     <div class="form-group">
-                        <label for="column">栏目</label>
-                        <select class="form-control"
-                                id="column"
-                                name="column"
-                        >
-                            <option value="none">请选择栏目..</option>
-                            {% for column in columns %}
-                                <option value="{{ column.id }}"
-                                        {% if column.id == article.column.id %}
-                                        selected
-                                        {% endif %}
-                                >
-                                    {{ column }}
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="body">文章正文</label>
+                        <div style="display:flex;align-items: baseline;justify-content: space-between;margin-bottom: 10px">
+                            <div>
+                                <label for="body"><strong>正文编辑</strong></label>
+                            </div>
+                            <div style="">
+                                <button type="submit" class="btn btn-success" style="margin-right: 10px">保存</button>
+                            </div>
+                        </div>
+
                         <div id="test-editor">
                         <textarea class="form-control" type="text" id="body" name="body" rows="12" style="display:none;">{{ article.body }}
                         </textarea>
                         </div>
 
                     </div>
-                    <button type="submit" class="btn btn-primary">完成</button>
-
                 </form>
 
             </div>
@@ -61,15 +63,3 @@
     </div>
 {% endblock edit %}
 
-{% block js %}
-    <script src="{% static 'plugins/editor.md-master/editormd.min.js' %}"></script>
-    <script type="text/javascript">
-        $(function () {
-            var editor = editormd("test-editor", {
-                // width  : "100%",
-                height: "600px",
-                path: "{% static 'plugins/editor.md-master/lib/' %}"
-            });
-        });
-    </script>
-{% endblock %}
