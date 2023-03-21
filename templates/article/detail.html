@@ -67,6 +67,7 @@
 
             <!-- 文章正文 -->
             <div class="col-12">
+                 <div class=""> {{ article.body }}</div>
                 <div id="article-body" class="article-body"></div>
             </div>
         </div>
@@ -109,6 +110,7 @@
                     //将后台返回的数据，更新到option中
                     if (res.status) {
                         str = res.data.body;
+                        alert("suc")
                         markdown(str);
                     }
                 }
