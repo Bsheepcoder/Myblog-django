@@ -67,7 +67,6 @@
 
             <!-- 文章正文 -->
             <div class="col-12">
-                <div class=""> {{ article.body }}</div>
                 <div id="article-body" class="article-body"></div>
             </div>
         </div>
@@ -99,21 +98,21 @@
 
     <script>
         $(function () {
-            $.ajax({
-                url: 'http://127.0.0.1:8000/article/get-article-body/',
-                type: "get",
-                dataType: "JSON",
-                success:
-                    function (res) {
-                        //将后台返回的数据，更新到option中
-                        if (res.status) {
-                            str = res.data.body;
-                            alert("suc")
-                            markdown(str);
-                        }
-                    }
-            });
+
         })
+        $.ajax({
+            url: '/article/get-article-body/',
+            type: "get",
+            dataType: "JSON",
+            success:
+                function (res) {
+                    //将后台返回的数据，更新到option中
+                    if (res.status) {
+                        str = res.data.body;
+                        markdown(str);
+                    }
+                }
+        });
 
         function markdown(str) {
             // https://pandao.github.io/editor.md/
