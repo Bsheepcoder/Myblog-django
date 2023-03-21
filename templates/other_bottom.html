@@ -1,0 +1,64 @@
+<div class="card mt-2" style="">
+    <div class="card-body">
+        <h3 class="card-title">文章分类</h3>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <ul class="mt-4">
+            {% for col,num in columnsToAll %}
+                <div class="mt-2">
+                    <li><a href="{% url 'article:article_list' %}?column={{ col.title }}">{{ col.title }} </a><span
+                            class="badge badge-primary badge-pill">{{ num }}</span></li>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+<div class="card mt-2">
+    <div class="card-body" style="padding: 0">
+        <div style="margin: 10px;margin-left: 20px">
+            <h3 class="card-title">热门文章</h3>
+        </div>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+        <div class="list-group">
+            {% for item in article_hotList %}
+                <a href="/article/article-detail/{{ item.id }}/" class="list-group-item list-group-item-action" style="border-radius: 0;border: none;padding-bottom: 0">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1" style=" font-weight: bold">{{ item.title }}</h6>
+                        <i class="fa-solid fa-fire" style="color: red">{{ item.total_views }}</i>
+                    </div>
+                    <div style="display: flex;align-items: baseline;justify-content: space-between">
+                        <div>
+                            <span class="badge badge-success badge-pill"><small>{{ item.column }}</small></span>
+                        </div>
+                        <div>
+                            <small style="color:gray;">{{ item.created }}</small>
+                        </div>
+
+
+                    </div>
+                <hr style="margin:0;margin-top: 4px">
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<div class="card mt-2" style="">
+    <div class="card-body">
+        <h4 class="card-title">网站统计</h4>
+        <h6 class="card-subtitle mb-2 text-muted"></h6>
+
+        <ul class="list-group list-group-flush" style="font-size: medium">
+            <li class="list-group-item" style="display: flex"><strong>文章数目 : </strong>
+                <p style="margin:0;margin-left: auto">{{ article_number }}</p></li>
+            <li class="list-group-item" style="display: flex"><strong>已运行时间 : </strong>
+                <p style="margin:0;margin-right: 0;margin-left: auto">{{ runtime_days }} 天 </p></li>
+            <li class="list-group-item" style="display: flex"><strong>总访问量 :</strong>
+                <p style="margin:0;margin-right: 0;margin-left: auto">{{ article_views }} 次 </p></li>
+        </ul>
+    </div>
+</div>
+
+
