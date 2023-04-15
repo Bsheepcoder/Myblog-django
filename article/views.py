@@ -1,5 +1,5 @@
 import json
-
+import threading
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -64,34 +64,39 @@ def article_list(request):
 
 
 # 找到markdown中的frontmatter属性
-
+# 解决并发访问文章的问题，加了一个线程锁
 id_all = None
-
+lock = threading.Lock()
 
 # 文章详情
 def article_detail(request, id):
     global id_all
+
     id_all = id
 
     # 取出相应的文章
     article = ArticlePost.objects.get(id=id)
     body = article.body
-
+    print(body)
     # 浏览量 +1,没有对不同ip设置
     article.total_views += 1
     article.save(update_fields=['total_views'])
 
     # 需要传递给模板的对象
     context = {'article': article,
-               'body': json.dumps(body),
+               'body': body,
                'id': id,
                }
     # 载入模板，并返回context对象
     return render(request, 'article/detail.html', context)
 
-
+#　废弃
 def get_article_body(request):
-    article = ArticlePost.objects.get(id=id_all)
+    try:
+        article = ArticlePost.objects.get(id=id_all)
+    finally:
+        lock.release()
+
     result = {
         "status": True,
         "data": {

@@ -9,13 +9,11 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'plugins/editor.md-master/css/editormd.css' %}"/>
-    <link rel="stylesheet" href="{% static 'plugins/editor.md-master/css/editormd.preview.css' %}"/>
+{#    <link rel="stylesheet" href="{% static 'plugins/editor.md-master/css/editormd.preview.css' %}"/>#}
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon"/>
 
 
-
 {% endblock css %}
-
 
 <!-- 写入 base.html 中定义的 content -->
 {% block content %}
@@ -64,18 +62,18 @@
                     {{ article.updated|date:'Y-m-d' }} 更新
                 </div>
             </div>
-
-            <!-- 文章正文 -->
-            <div class="col-12">
-                <div id="article-body" class="article-body"></div>
-            </div>
+{#            <!-- 文章正文 -->#}
+{#            <div class="col-12">#}
+                <div id="article-body" class="article-body" style="display: none" >{{ body | safe }}</div>
+                <div id="article" class="article-body"></div>
+{#            </div>#}
         </div>
     </div>
 
 {% endblock content %}
 
 {% block catalog %}
-    <div class="card mt-2" style="position:relative;">
+    <div id="catalog" class="col-4 card mt-4" style="position:absolute;right:20px;width: 350px;  height: 400px; overflow: auto;">
         <div class="card-body">
             <h4 class="card-title"><i class="fa-solid fa-list"></i>
                 目录</h4>
@@ -95,31 +93,38 @@
     <script src="{% static 'plugins/editor.md-master/lib/underscore.min.js' %}"></script>
     <script src="{% static 'plugins/katex/katex.min.js' %}"></script>
     <script src="{% static 'plugins/editor.md-master/lib/sequence-diagram.min.js' %}"></script>
-
     <script>
-        $(function () {
 
+        $(function () {
+            var myDiv = document.getElementById("article-body");
+            var myDivContent = myDiv.innerHTML;
+            markdown(myDivContent);
         })
-        $.ajax({
-            url: '/article/get-article-body/',
-            type: "get",
-            dataType: "JSON",
-            success:
-                function (res) {
-                    //将后台返回的数据，更新到option中
-                    if (res.status) {
-                        str = res.data.body;
-                        markdown(str);
-                    }
-                }
-        });
+
+        $(window).scroll(function () {
+            const scrollHeight = document.documentElement.scrollTop;
+		    $("#catalog").css({ top: scrollHeight + 230 + "px" }).show();
+	    });
+
+        {#$.ajax({#}
+        {#    url: '/article/get-article-body/？id=' + ,#}
+        {#    type: "get",#}
+        {#    dataType: "JSON",#}
+        {#    success:#}
+        {#        function (res) {#}
+        {#            //将后台返回的数据，更新到option中#}
+        {#            if (res.status) {#}
+        {#                str = res.data.body;#}
+        {#                markdown(str);#}
+        {#            }#}
+        {#        }#}
+
 
         function markdown(str) {
             // https://pandao.github.io/editor.md/
-            var editor = editormd.markdownToHTML('article-body', {
+            var editor = editormd.markdownToHTML('article', {
                 //详细配置 https://blog.csdn.net/qq_29645505/article/details/105591485
                 //图片 https://blog.csdn.net/jxlhljh/article/details/123844743
-                htmlDecode: "style,script,iframe",
                 markdown: str, //待渲染的markdown文本字符串
                 tocContainer: '#article-toc',	//指定目录容器的id
                 tocDropdown: true,
@@ -127,9 +132,10 @@
                 taskList: true,
                 tex: true, // 默认不解析
                 codeFold: true,
+                htmlDecode:true,
             });
-
-
+            const scrollHeight = document.documentElement.scrollTop;
+            $("#catalog").css({ top: scrollHeight + 230 + "px" }).show();
         }
 
         //防范csrf攻击的删除

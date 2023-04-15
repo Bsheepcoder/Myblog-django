@@ -5,8 +5,7 @@
 <html lang="zh-cn">
 
 <head>
-    <meta charset="utf-8">
-
+    <meta   charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}{% endblock %}</title>
     <!-- 引入bootstrap的css文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -34,7 +33,7 @@
 <body style="min-height: 100vh;background-color: #f8f8f8">
 
 <div class="container" style="min-height: 100vh;background-color: white;padding: 0;box-shadow: 0 0 10px 5px #afafaf;">
-    {% include 'header.html' %}
+       {% include 'header.html' %}
     {% block edit %}
     {% endblock %}
     <div id="row2" class="row" style="padding: 0;margin-right: 0;margin-left: 0">
@@ -44,14 +43,13 @@
         </div>
         <div class="col-md-4" style="padding:10px;clear: both">
             {% include 'other_top.html' %}
-            {% block catalog %}
-            {% endblock %}
             {% include 'other_bottom.html' %}
         </div>
-    </div>
-
-    <div class="back-to-top cd-top faa-float animated cd-is-visible" style="top: -800px;"></div>
 </div>
+
+{% block catalog %}
+
+{% endblock %}
 {% include 'footer.html' %}
 
 
