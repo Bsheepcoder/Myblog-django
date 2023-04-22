@@ -77,7 +77,6 @@ def article_detail(request, id):
     # 取出相应的文章
     article = ArticlePost.objects.get(id=id)
     body = article.body
-    print(body)
     # 浏览量 +1,没有对不同ip设置
     article.total_views += 1
     article.save(update_fields=['total_views'])
