@@ -85,16 +85,10 @@ WSGI_APPLICATION = 'blog_04.wsgi.application'
 # }
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myblog',
-        'USER': 'root',
-        'PASSWORD': 'Cqzod@123',
-        'HOST': '47.115.218.160',
-        'PORT': 3306,
-    }
-}
+###
+
+###
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
